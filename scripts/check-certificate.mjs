@@ -12,7 +12,9 @@ assert.equal([...page.matchAll(/rel="canonical"/g)].length, 1);
 const canonical = page.match(/rel="canonical" href="([^"]+)"/)[1];
 assert.ok(canonical.endsWith("/sertifikat/"));
 assert.ok(readFileSync("dist/sitemap.xml", "utf8").includes(`<loc>${canonical}</loc>`));
-assert.equal([...home.matchAll(/href="\.\/sertifikat\/"/g)].length, 1);
+assert.equal([...home.matchAll(/href="\.\/sertifikat\/"/g)].length, 2);
+const services = home.match(/<section id="services"[\s\S]*?<\/section>/)?.[0] ?? "";
+assert.match(services, /<a href="\.\/sertifikat\/"[^>]*>[\s\S]*?Подарочный сертификат на уборку[\s\S]*?Подробнее[\s\S]*?<\/a>/);
 assert.ok(!home.includes("Подарите чистый дом"));
 assert.match(page, /src="\.\.\/metrika\.js\?v=cert-1"/);
 for (const [, url] of page.matchAll(/(?:href|src)="(\.\.\/(?:assets|images)\/[^"]+)"/g)) {

@@ -59,6 +59,14 @@ export default function Services() {
         <p className="mt-6 text-xs text-ink/45">
           Отдельно: химчистка мебели и ковров, офисы. Цена — по запросу.
         </p>
+        <a href="./sertifikat/" className="mt-8 flex flex-col gap-5 rounded-2xl bg-emerald-light px-6 py-7 transition hover:bg-emerald-light/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald sm:flex-row sm:items-center sm:justify-between md:px-8">
+          <span>
+            <span className="kicker">Идея подарка</span>
+            <span className="mt-2 block text-xl font-semibold text-graphite md:text-2xl">Подарочный сертификат на уборку</span>
+            <span className="mt-2 block text-sm leading-6 text-ink/60">Подарите близким чистый дом и время для себя. Номинал — от 6 000 ₽.</span>
+          </span>
+          <span className="inline-flex shrink-0 items-center gap-4 text-sm font-semibold text-emerald">Подробнее <span aria-hidden="true">↗</span></span>
+        </a>
       </div>
     </section>
   );
