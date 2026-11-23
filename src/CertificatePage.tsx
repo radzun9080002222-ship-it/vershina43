@@ -1,7 +1,8 @@
 import { Gift } from "lucide-react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { MAX_LINK, PHONE_HREF, TG_LINK, WA_LINK, TARIFFS } from "./data";
+import { ContactPill } from "./components/FloatBar";
+import { PHONE_HREF, TARIFFS } from "./data";
 import { MINIMUM_VISIT_PRICE } from "./pricing";
 import { certificate } from "./certificate-config";
 
@@ -22,33 +23,6 @@ const questions = [
   ["Что, если уборка стоит дороже номинала?", "Получатель может доплатить разницу."],
 ];
 
-function draft(link: string, message: string) {
-  const url = new URL(link);
-  url.searchParams.set("text", message);
-  return url.href;
-}
-
-function OrderLinks({ value }: { value?: number }) {
-  const message = value
-    ? `Здравствуйте! Хочу подарочный сертификат на уборку на ${amount(value)} ₽`
-    : `Здравствуйте! Хочу подарочный сертификат на уборку на свою сумму от ${minimum}.`;
-  return (
-    <div className="mt-5">
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-3 text-sm font-semibold">
-        <a data-cert-order href={PHONE_HREF} className="btn-primary">Позвонить</a>
-        <a data-cert-order href={draft(TG_LINK, message)} className="text-emerald underline underline-offset-4">Telegram</a>
-        <a data-cert-order href={draft(WA_LINK, message)} className="text-emerald underline underline-offset-4">WhatsApp</a>
-      </div>
-      <details className="mt-4 text-sm text-ink/75">
-        <summary className="cursor-pointer font-semibold text-emerald">Заказать в MAX</summary>
-        <label className="mt-3 block text-xs" htmlFor={`max-message-${value ?? "custom"}`}>Текст для MAX — скопируйте и вставьте в чат</label>
-        <textarea id={`max-message-${value ?? "custom"}`} readOnly rows={3} value={message} className="mt-1 w-full rounded-lg border border-black/10 bg-white p-2 text-sm" />
-        <a data-cert-order href={MAX_LINK} className="mt-2 inline-block font-semibold text-emerald underline underline-offset-4">Открыть MAX</a>
-      </details>
-    </div>
-  );
-}
-
 export default function CertificatePage() {
   return (
     <>
@@ -60,7 +34,7 @@ export default function CertificatePage() {
               <p className="kicker">Подарочный сертификат · в {certificate.city}</p>
               <h1 className="mt-4 text-4xl font-semibold leading-tight text-graphite sm:text-6xl">Подарите чистый дом</h1>
               <p className="mt-4 max-w-lg text-base leading-relaxed text-ink/75 sm:text-lg">Маме, родителям, подруге или близким на новоселье. Вы выбираете сумму, а получатель — удобную дату уборки.</p>
-              <a href="#nominaly" className="btn-primary mt-6">Выбрать сертификат</a>
+              <a data-cert-order href={PHONE_HREF} className="btn-primary mt-6">Заказать</a>
               <p className="mt-3 text-sm text-ink/70">От {minimum} · без срока действия</p>
             </div>
             <div aria-hidden="true" className="hidden rounded-3xl bg-graphite p-10 text-white shadow-card lg:block">
@@ -79,16 +53,10 @@ export default function CertificatePage() {
         </section>
         <section id="nominaly" className="scroll-mt-24 bg-emerald/5">
           <div className="container-x py-12 sm:py-16">
-            <h2 className="text-3xl font-semibold">Выберите номинал</h2>
-            <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-              {[MINIMUM_VISIT_PRICE, 10000, 15000, undefined].map((value) => (
-                <article key={value ?? "custom"} className="min-w-0 rounded-2xl border border-black/10 bg-white p-5">
-                  <p className="text-sm text-ink/70">{value ? "Номинал сертификата" : "Любая сумма"}</p>
-                  <h3 className="mt-2 text-2xl font-semibold">{value ? `${amount(value)} ₽` : `От ${minimum}`}</h3>
-                  <OrderLinks value={value} />
-                </article>
-              ))}
-            </div>
+            <p className="kicker">Номинал сертификата</p>
+            <h2 className="mt-3 text-3xl font-semibold">От {minimum}</h2>
+            <p className="mt-4 max-w-xl leading-relaxed text-ink/75">Менеджер поможет подобрать номинал по площади квартиры.</p>
+            <div className="mt-6"><ContactPill certificateOrder /></div>
           </div>
         </section>
         <section className="container-x grid gap-10 py-12 sm:py-16 lg:grid-cols-2">
@@ -138,7 +106,7 @@ export default function CertificatePage() {
           </div>
           <div className="mt-12 rounded-3xl border border-black/10 bg-emerald/5 p-6 sm:p-9">
             <h2 className="text-2xl font-semibold">Подарите близким время для себя</h2>
-            <a href="#nominaly" className="btn-primary mt-5">Выбрать сертификат</a>
+            <a data-cert-order href={PHONE_HREF} className="btn-primary mt-5">Заказать</a>
           </div>
         </section>
       </main>
