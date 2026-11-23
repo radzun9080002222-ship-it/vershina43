@@ -37,12 +37,25 @@ export default function CertificatePage() {
               <a data-cert-order href={PHONE_HREF} className="btn-primary mt-6">Заказать</a>
               <p className="mt-3 text-sm text-ink/70">От {minimum} · без срока действия</p>
             </div>
-            <div aria-hidden="true" className="hidden rounded-3xl bg-graphite p-10 text-white shadow-card lg:block">
-              <Gift size={42} strokeWidth={1.4} />
-              <p className="mt-8 text-xs font-semibold uppercase tracking-widest text-white/70">Вершина · подарок с заботой</p>
-              <p className="mt-3 text-3xl font-semibold">Сертификат<br />на уборку</p>
-              <p className="mt-6 text-sm text-white/70">Действует в {certificate.city}</p>
-            </div>
+            <figure aria-label="Образец подарочного сертификата" className="min-w-0 max-w-lg rounded-3xl bg-gradient-to-br from-graphite to-emerald p-2 text-white shadow-card sm:p-3 lg:w-full lg:justify-self-end">
+              <div className="rounded-2xl border border-white/30 p-4 sm:p-7">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <span className="text-xs font-semibold uppercase tracking-widest">Вершина</span>
+                  <span className="rounded-full border border-white/40 px-2.5 py-1 text-xs">Образец</span>
+                </div>
+                <div className="mt-4 flex items-center justify-between gap-3 sm:mt-6">
+                  <div>
+                    <p className="text-xs text-white/90">Подарочный</p>
+                    <p className="mt-1 text-xl font-semibold leading-tight sm:text-3xl">Сертификат<br />на уборку</p>
+                  </div>
+                  <Gift aria-hidden="true" strokeWidth={1.25} className="h-10 w-10 shrink-0 sm:h-16 sm:w-16" />
+                </div>
+                <div className="mt-4 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 border-t border-white/30 pt-3 text-sm sm:mt-6">
+                  <span className="text-white/90">Действует в {certificate.city}</span>
+                  <span className="font-semibold">От {minimum}</span>
+                </div>
+              </div>
+            </figure>
           </div>
         </section>
         <section className="container-x py-12 sm:py-16" aria-labelledby="recipients">

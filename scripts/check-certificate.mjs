@@ -6,6 +6,8 @@ import { runInNewContext } from "node:vm";
 const page = readFileSync("dist/sertifikat/index.html", "utf8");
 const home = readFileSync("dist/index.html", "utf8");
 assert.match(page, /<h1[^>]*>Подарите чистый дом<\/h1>/);
+assert.match(page, /<figure aria-label="Образец подарочного сертификата"[^>]*>[\s\S]*?>Образец<\/span>[\s\S]*?<\/figure>/);
+assert.ok(!home.includes('Образец подарочного сертификата'));
 assert.equal([...page.matchAll(/rel="canonical"/g)].length, 1);
 const canonical = page.match(/rel="canonical" href="([^"]+)"/)[1];
 assert.ok(canonical.endsWith("/sertifikat/"));
