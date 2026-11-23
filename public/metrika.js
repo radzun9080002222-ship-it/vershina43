@@ -12,6 +12,9 @@
     if (event.target.closest && event.target.closest('#calc button')) window.ym(id, 'reachGoal', 'calc_interaction');
     var link = event.target.closest && event.target.closest('a[href]');
     if (!link) return;
+    if (/\/sertifikat\/(?:index\.html)?$/.test(location.pathname) && link.hasAttribute('data-cert-order')) {
+      window.ym(id, 'reachGoal', 'cert_order');
+    }
     var href = link.getAttribute('href');
     var goal = href.startsWith('tel:') ? 'click_phone' :
       /^https:\/\/max\.ru\//.test(href) ? 'click_max' :
